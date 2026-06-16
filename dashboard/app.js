@@ -88,8 +88,7 @@ function connectMQTT() {
         useSSL: false, // broker.benax.rw uses plain WebSockets (ws://)
         onSuccess: onConnectSuccess,
         onFailure: onConnectFailure,
-        keepAliveInterval: 30,
-        reconnect: true
+        keepAliveInterval: 30
     };
 
     try {
