@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Monitor & MQTT Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Paho MQTT client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="background-decor">
+        <div class="glow-orb" id="orb-1"></div>
+        <div class="glow-orb" id="orb-2"></div>
+    </div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <span class="pulse-indicator" id="connection-indicator"></span>
+                <h1 id="main-title">SPE. Temperature Monitor</h1>
+            </div>
+            <div class="connection-status">
+                Status: <span id="status-text" class="status-disconnected">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-grid">
+            <!-- Left Panel: Stats and Info -->
+            <div class="panel-left">
+                <!-- Candidate Info Card -->
+                <div class="card glassmorphism" id="candidate-card">
+                    <div class="card-header">
+                        <h2>Candidate Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-row">
+                            <span class="label">Name:</span>
+                            <span class="valueHighlight" id="candidate-name">UWASE Sonia</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Trade Code:</span>
+                            <span class="value">SPE (Embedded Systems Software Integration)</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">MQTT Topic:</span>
+                            <code class="code-badge" id="mqtt-topic-badge">uwase/sonia/temperature</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Temperature Card -->
+                <div class="card glassmorphism text-center" id="temp-display-card">
+                    <div class="card-header">
+                        <h2>Real-time Temp</h2>
+                    </div>
+                    <div class="card-body temp-container">
+                        <div class="temp-display">
+                            <span id="temp-val">--.-</span><span class="unit">°C</span>
+                        </div>
+                        <div class="temp-meta">
+                            Last Updated: <span id="last-updated">Never</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Chart -->
+            <div class="panel-right card glassmorphism" id="chart-card">
+                <div class="card-header">
+                    <h2>Live Temperature History</h2>
+                </div>
+                <div class="card-body chart-container">
+                    <canvas id="tempChart" width="100%" height="100%"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
